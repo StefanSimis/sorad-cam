@@ -24,16 +24,14 @@ Point the browser to
 ```
 <raspberry_pi_ip:5000>
 ```
+This should show the latest available image
 
-Additional routes: 
+Additional routes to generate new images: 
 ```
 <raspberry_pi_ip:5000/picture>    - take a picture using the current configuration and show it
 <raspberry_pi_ip:5000/getpicture> - take a picture and send it as jpeg stream
-<raspberry_pi_ip:5000/low>        - configure the camera to low resolution [1202x648], take a picture using the current configuration and show it
 <raspberry_pi_ip:5000/getlow>     - configure the camera to low resolution [1202x648], take a picture and send it as jpeg stream
-<raspberry_pi_ip:5000/medium>     - configure the camera to medium resolution [2404x1296], take a picture using the current configuration and show it
 <raspberry_pi_ip:5000/getmedium>  - configure the camera to medium resolution [2404x1296], take a picture and send it as jpeg stream
-<raspberry_pi_ip:5000/full>       - configure the camera to full resolution [4608x2592], take a picture using the current configuration and show it
 <raspberry_pi_ip:5000/getfull>    - configure the camera to full resolution [4608x2592], take a picture and send it as jpeg stream
 ```
 
