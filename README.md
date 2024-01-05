@@ -1,88 +1,52 @@
-# Make you own Raspberry Pi Camera Stream
+This code was originally forked from https://github.com/EbenKouao/pi-camera-stream-flask.git under MIT licence
 
-Create your own live stream from a Raspberry Pi using the Pi camera module. Build your own applications from here.
-
-## How it works
-The Pi streams the output of the camera module over the web via Flask. Devices connected to the same network would be able to access the camera stream via
+# A flask app to serve Pi camera images
+The Pi streams the output of the camera module over the web via Flask. Devices connected to the same network would be able to access the service via
 
 ```
 <raspberry_pi_ip:5000>
 ```
 
-## Screenshots
-| ![Setup](readme/pi-stream-client.jpg) | ![Live Pi Camera Stream](readme/pi-stream-screen-capture.jpg) |
-| ------------------------------------- | ------------------------------------------------------------- |
-| Pi Setup                              | Pi - Live Stream                                              |
-
 ## Preconditions
 
-* Raspberry Pi 4, 2GB is recommended for optimal performance. However you can use a Pi 3 or older, you may see a increase in latency.
-* Raspberry Pi 4 Camera Module or Pi HQ Camera Module (Newer version)
-* Python 3 recommended.
+* The original code was stripped down to work on a Raspberry Pi Zero W, all video elements were removed
 
 ## Library dependencies
-Install the following dependencies to create camera stream.
 
 ```
-sudo apt-get update
-sudo apt-get upgrade
-
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev
-sudo apt-get install libqtgui4
-sudo apt-get install libqt4-test
-sudo apt-get install libhdf5-dev
-
 sudo pip3 install flask
-sudo pip3 install numpy
-sudo pip3 install opencv-contrib-python
-sudo pip3 install imutils
-sudo pip3 install opencv-python
+sudo pip3 install picamera2
+
+```
+## Launch web service
+```python main.py```
+```
+
+## Load image through browser
+
+Point the browser to 
+
+```
+<raspberry_pi_ip:5000>
+```
+
+Additional routes: 
+
+```
+<raspberry_pi_ip:5000/picture>    - take a picture using the current configuration and show it
+<raspberry_pi_ip:5000/getpicture> - take a picture and send it as jpeg stream
+<raspberry_pi_ip:5000/low>        - configure the camera to low resolution [1202x648], take a picture using the current configuration and show it
+<raspberry_pi_ip:5000/getlow>     - configure the camera to low resolution [1202x648], take a picture and send it as jpeg stream
+<raspberry_pi_ip:5000/medium>     - configure the camera to medium resolution [2404x1296], take a picture using the current configuration and show it
+<raspberry_pi_ip:5000/getmedium>  - configure the camera to medium resolution [2404x1296], take a picture and send it as jpeg stream
+<raspberry_pi_ip:5000/full>       - configure the camera to full resolution [4608x2592], take a picture using the current configuration and show it
+<raspberry_pi_ip:5000/getfull>    - configure the camera to full resolution [4608x2592], take a picture and send it as jpeg stream
 
 ```
 
-Note: This installation of opencv may take a while depending on your pi model.
+The initial camera configuration is the full resolution. Horizontal and Vertical flipping can be set in main.py 
 
-OpenCV alternate installation (in the event of failed opencv builds):
 
-```
-sudo apt-get install libopencv-dev python3-opencv
-```
 
-## Step 1 – Cloning Raspberry Pi Camera Stream
-Open up terminal and clone the Camera Stream repo:
 
-```
-cd /home/pi
-git clone https://github.com/EbenKouao/pi-camera-stream-flask.git
-```
-
-## Step 2 – Launch Web Stream
-
-Note: Creating an Autostart of the main.py script is recommended to keep the stream running on bootup.
-```bash cd modules
-sudo python3 /home/pi/pi-camera-stream-flask/main.py
-```
-
-## Step 3 – Autostart your Pi Stream
-
-Optional: A good idea is to make the the camera stream auto start at bootup of your pi. You will now not need to re-run the script every time you want to create the stream. You can do this by going editing the /etc/profile to:
-
-```
-sudo nano /etc/profile
-```
-
-Go the end of the and add the following (from above):
-
-```
-sudo python3 /home/pi/pi-camera-stream-flask/main.py
-```
-
-This would cause the following terminal command to auto-start each time the Raspberry Pi boots up. This in effect creates a headless setup - which would be accessed via SSH.
-Note: make sure SSH is enabled.
-
-## More Projects / Next Steps
-View the latest Build: [Pi Smart Cam with Motion Sensor](https://github.com/EbenKouao/pi-smart-cam)
-
-Alternatively, view more projects that build on the Pi Camera on [smartbuilds.io](https://smartbuilds.io).
 
