@@ -7,13 +7,46 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background-color: black;
-  color: #f0f0f0
+  color: #ffffff
+}
+
+p {
+  line-height: 1.4;
+  color: #ffffff
+}
+
+a {
+  outline-color: transparent;
+}
+
+a:link {
+  color: #6900ff;
+}
+
+a:visited {
+  color: #a5c300;
+}
+
+a:focus {
+  text-decoration: none;
+  background: #bae498;
+}
+
+a:hover {
+  text-decoration: none;
+  background: #cdfeaa;
+}
+
+a:active {
+  background: #6900ff;
+  color: #cdfeaa;
 }
 
 img {
@@ -34,6 +67,12 @@ img {
   Latest image:</br>
   Size:  {{ size }} kB</br>
   Date:  {{ mtime }}</br>
+  </br>
+  
+  <a href="{{ url_for('get_picture_full') }}">Full-res image</a>  
+  <a href="{{ url_for('get_picture_medium') }}">Medium-res image</a>  
+  <a href="{{ url_for('get_picture_low') }}">Low-res image</a>  
+  <a href="{{ url_for('index') }}">Latest image</a>  
 
   <img src="{{ url_for('static', filename='latest-image.jpg') }}">
 
